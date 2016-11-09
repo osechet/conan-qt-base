@@ -10,7 +10,7 @@ class QtConan(ConanFile):
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "opengl": ["desktop", "dynamic"]}
     default_options = "shared=True", "opengl=desktop"
-    url="http://github.com/osechet/conan-qt"
+    url="http://github.com/osechet/conan-qt-base"
     license="http://doc.qt.io/qt-5/lgpl.html"
     short_paths = True
 

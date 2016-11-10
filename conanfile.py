@@ -99,6 +99,8 @@ class QtConan(ConanFile):
             args += ["-silent", "-xcb"]
         else:
             args += ["-silent"]
+            if self.settings.arch == "x86":
+                args += ["-platform macx-clang-32"]
 
         self.output.info("Using '%s' threads" % str(cpu_count()))
         self.run("cd %s && ./configure %s" % (self.sourceDir, " ".join(args)))

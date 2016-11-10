@@ -15,19 +15,26 @@ class QtConan(ConanFile):
     short_paths = True
 
     def system_requirements(self):
-        pack_name = None
+        pack_names = None
         if os_info.linux_distro == "ubuntu":
-            pack_name = ("libgl1-mesa-dev libxcb1 libxcb1-dev "
-                         "libx11-xcb1 libx11-xcb-dev libxcb-keysyms1 libxcb-keysyms1-dev "
-                         "libxcb-image0 libxcb-image0-dev libxcb-shm0 libxcb-shm0-dev "
-                         "libxcb-icccm4 libxcb-icccm4-dev libxcb-sync1 libxcb-sync-dev "
-                         "libxcb-xfixes0-dev libxrender-dev libxcb-shape0-dev "
-                         "libxcb-randr0-dev libxcb-render-util0 libxcb-render-util0-dev "
-                         "libxcb-glx0-dev libxcb-xinerama0 libxcb-xinerama0-dev")
-        if pack_name:
+            pack_names = ["libgl1-mesa-dev", "libxcb1", "libxcb1-dev",
+                        "libx11-xcb1", "libx11-xcb-dev", "libxcb-keysyms1", "libxcb-keysyms1-dev",
+                        "libxcb-image0", "libxcb-image0-dev", "libxcb-shm0", "libxcb-shm0-dev",
+                        "libxcb-icccm4", "libxcb-icccm4-dev", "libxcb-sync1", "libxcb-sync-dev",
+                        "libxcb-xfixes0-dev", "libxrender-dev", "libxcb-shape0-dev",
+                        "libxcb-randr0-dev", "libxcb-render-util0", "libxcb-render-util0-dev",
+                        "libxcb-glx0-dev", "libxcb-xinerama0", "libxcb-xinerama0-dev"]
+
+            if self.settings.arch == "x86":
+                full_pack_names = []
+                for pack_name in pack_names:
+                    full_pack_names += [pack_name + ":i386"]
+                pack_names = full_pack_names
+
+        if pack_names:
             installer = SystemPackageTool()
             installer.update() # Update the package database
-            installer.install(pack_name) # Install the package
+            installer.install(" ".join(pack_names)) # Install the package
 
     def source(self):
         major = ".".join(self.version.split(".")[:2])
@@ -97,6 +104,8 @@ class QtConan(ConanFile):
     def _build_unix(self, args):
         if self.settings.os == "Linux":
             args += ["-silent", "-xcb"]
+            if self.settings.arch == "x86":
+                args += ["-platform linux-g++-32"]
         else:
             args += ["-silent"]
             if self.settings.arch == "x86":

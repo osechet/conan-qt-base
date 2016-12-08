@@ -1,7 +1,7 @@
 Conan package for Qt Base
 --------------------------------------------
 
-[![Build Status](https://travis-ci.org/osechet/conan-qt.svg?branch=test/5.6.1-1)](https://travis-ci.org/osechet/conan-qt-base)
+[![Build Status](https://travis-ci.org/osechet/conan-qt.svg?branch=testing/5.6.1-1)](https://travis-ci.org/osechet/conan-qt-base)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/gboj3x82d42eoasw?svg=true)](https://ci.appveyor.com/project/osechet/conan-qt-base)
 

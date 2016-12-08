@@ -6,7 +6,7 @@ services:
 env:
   global:
     - CONAN_UPLOAD: 1
-    - CONAN_REFERENCE: "QtBase/5.6.1-1"
+    - CONAN_REFERENCE: "QtBase/5.6.2"
     - CONAN_USERNAME: "osechet"
     - CONAN_CHANNEL: "testing"
     - CONAN_TOTAL_PAGES: 1

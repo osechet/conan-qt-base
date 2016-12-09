@@ -31,7 +31,7 @@ install:
   - pip.exe install conan_package_tools # It install conan too
   - conan user # It creates the conan data directory
 
-before_build:
+before_test:
   # Workaround for CMake not wanting sh.exe on PATH for MinGW
   - ren "C:\Program Files\Git\usr\bin\sh.exe" _sh.exe
 
